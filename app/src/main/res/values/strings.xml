@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Easy Bake Recipes</string>
+    <string name="Content_Descreiption_Back_Button">Back Button</string>
+    <string name="content_description_recipe_image">Recipe Image</string>
+    <string name="Content_description_settings_button">Settings Button</string>
+    <string name="label_ingredients">Ingredients</string>
+    <string name="label_Steps">Steps</string>
+    <string name="label_next_step">Next Step</string>
+    <string name="label_previous_step">Previous Step</string>
+    <string name="step_image_content_descripition">Image pertaining to the step</string>
+    <string name="Toast_Back_to_exit">Press back again to exit.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="Widget_List_view_fallback">Ingredients not loading.</string>
+</resources>

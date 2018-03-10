@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/step_video_player"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_margin="@dimen/Padding_Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:controller_layout_id="@layout/exo_playback_control_view"/>
+
+        <TextView
+            android:id="@+id/tv_step_description"
+            style="@style/Body_Custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="@dimen/Padding_Large"
+            android:padding="@dimen/Padding_Large"
+            android:background="@drawable/curved_border_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/step_video_player"
+            tools:text="Step Description" />
+
+        <ImageView
+            android:id="@+id/iv_step_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="@dimen/Padding_Large"
+            android:contentDescription="@string/step_image_content_descripition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_step_description" />
+
+        <Button
+            android:id="@+id/next_Step"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/Padding_DoubleLarge"
+            android:background="@drawable/curved_border_selector"
+            android:text="@string/label_next_step"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/previous_Step"
+            app:layout_constraintTop_toBottomOf="@+id/iv_step_image" />
+
+        <Button
+            android:id="@+id/previous_Step"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/Padding_DoubleLarge"
+            android:background="@drawable/curved_border_selector"
+            android:text="@string/label_previous_step"
+            app:layout_constraintBaseline_toBaselineOf="@+id/next_Step"
+            app:layout_constraintEnd_toStartOf="@+id/next_Step"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_step_image" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
+

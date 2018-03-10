@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/curved_border_with_fill"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/Padding_Large"
+            android:layout_marginTop="@dimen/Padding_Medium">
+
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/widget_back_button"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_keyboard_arrow_left"
+                android:layout_alignBaseline="@id/widget_forward_button"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/widget_recipe_name"
+                android:textSize="25sp"
+                tools:text="recipe_name"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@id/widget_back_button"
+                android:layout_toStartOf="@id/widget_forward_button"
+                android:layout_alignBaseline="@id/widget_back_button"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="24dp"
+                android:id="@+id/widget_forward_button"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_keyboard_arrow_right"
+                android:background="@android:color/transparent"/>
+        </RelativeLayout>
+
+        <include layout="@layout/divider_line_solid"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/Padding_Large"
+            android:id="@+id/lv_widget_ingredients"
+            android:layout_gravity="center"/>
+</LinearLayout>

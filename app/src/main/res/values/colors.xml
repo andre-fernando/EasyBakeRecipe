@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d1b06b</color>
+    <color name="colorPrimaryDark">#9e813e</color>
+    <color name="colorAccent">#6bc9d1</color>
+
+    <color name="Brown_Base">#d1b06b</color>
+    <color name="Brown_Light">#ffe29a</color>
+    <color name="Brown_Dark">#9e813e</color>
+
+    <color name="Purple_Base">#876bd1</color>
+    <color name="Purple_Light">#b99aff</color>
+    <color name="Purple_Dark">#563f9f</color>
+
+    <color name="Teal_Base">#6bc9d1</color>
+    <color name="Teal_Light">#9ffcff</color>
+    <color name="Teal_Dark">#3498a0</color>
+
+    <color name="TextColor">#000000</color>
+</resources>

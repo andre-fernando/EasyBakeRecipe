@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.andre_fernando.easybakerecipes">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".components.App"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.OverviewActivity" />
+        <activity
+            android:name=".activities.Fullscreen_Video_Activity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenVideo" />
+
+        <receiver android:name=".components.EasyBakeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/easy_bake_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".components.Widget_Service"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".components.WidgetIntentService"
+            android:exported="false" />
+
+        <provider
+            android:name=".db.RecipeContentProvider"
+            android:authorities="com.andre_fernando.easybakerecipes"
+            android:enabled="true"
+            android:exported="false"/>
+    </application>
+
+</manifest>

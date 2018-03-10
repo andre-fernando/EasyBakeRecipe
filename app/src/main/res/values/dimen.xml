@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Padding_Large">10dp</dimen>
+    <dimen name="Padding_Medium">5dp</dimen>
+    <dimen name="Padding_Smallest">3dp</dimen>
+    <dimen name="Padding_DoubleLarge">20dp</dimen>
+</resources>

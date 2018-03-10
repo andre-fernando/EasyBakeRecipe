@@ -1,0 +1,57 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullScreenVideo" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Action_Bar_Icons" parent="AppTheme">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginTop">@dimen/Padding_Large</item>
+    </style>
+
+    <style name="Heading" parent="AppTheme">
+        <item name="android:textColor">@color/TextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/Padding_Medium</item>
+        <item name="android:paddingBottom">@dimen/Padding_Medium</item>
+    </style>
+
+    <style name="Heading_Plain" parent="AppTheme">
+        <item name="android:textColor">@color/TextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">@dimen/Padding_Medium</item>
+        <item name="android:paddingBottom">@dimen/Padding_Medium</item>
+    </style>
+
+
+    <style name="Heading_With_Selector" parent="AppTheme">
+        <item name="android:textColor">@drawable/text_colour_selector</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/Padding_Smallest</item>
+        <item name="android:paddingBottom">@dimen/Padding_Smallest</item>
+    </style>
+
+    <style name="Body_Custom" parent="AppTheme">
+        <item name="android:textColor">@color/TextColor</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+</resources>
