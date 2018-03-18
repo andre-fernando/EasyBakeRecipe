@@ -18,21 +18,50 @@ public class OverviewActivity extends AppCompatActivity
         implements OverviewFragment.stepsClickListener ,
                     StepFragment.NextStepListener{
     private Recipe recipe;
-
+    private int current_step;
+    private static final String CURRENT_STEP_KEY="current";
+    private static final String IS_OVERVIEW = "overview";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-        Init_Overview();
+        Intent overview = getIntent();
+        recipe = overview.getParcelableExtra("recipe");
+
+        if (savedInstanceState !=null){
+            boolean is_overview =savedInstanceState.getBoolean(IS_OVERVIEW);
+            if (is_overview){
+                Init_Overview();
+            } else {
+                current_step = savedInstanceState.getInt(CURRENT_STEP_KEY);
+                Recover_StepFragment(current_step);
+            }
+        }else Init_Overview();
 
     }
 
+    private void Recover_StepFragment(int step_number){
+        if (MainActivity.twoPane) Init_Tablet(step_number);
+        else ReplaceStep(step_number);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.container_overview_a);
+        if ((MainActivity.twoPane) || (current instanceof StepFragment)){
+            outState.putInt(CURRENT_STEP_KEY,current_step);
+            if (current instanceof OverviewFragment) {
+                outState.putBoolean(IS_OVERVIEW, true);
+            }
+            else outState.putBoolean(IS_OVERVIEW,false);
+        } else outState.putBoolean(IS_OVERVIEW, true);
+        super.onSaveInstanceState(outState);
+    }
 
     private void Init_Overview() {
-        Intent overview = getIntent();
-        recipe = overview.getParcelableExtra("recipe");
-        if (MainActivity.twoPane) Init_Tablet();
+        if (MainActivity.twoPane) Init_Tablet(0);
         else Init_Phone();
     }
 
@@ -48,16 +77,17 @@ public class OverviewActivity extends AppCompatActivity
     }
 
 
-    private void Init_Tablet() {
+    private void Init_Tablet(int step_number) {
         //Overview Left Panel
         OverviewFragment overviewFragment = new OverviewFragment();
         Bundle b_overview = new Bundle();
         b_overview.putParcelable("recipe",recipe);
         overviewFragment.setArguments(b_overview);
+        current_step=step_number;
         //Step Fragment Right Panel
         StepFragment stepFragment = new StepFragment();
         Bundle b_steps = new Bundle();
-        b_steps.putParcelable("step",recipe.getSteps().get(0));
+        b_steps.putParcelable("step",recipe.getSteps().get(current_step));
         stepFragment.setArguments(b_steps);
 
         //Attaching the Fragments
@@ -102,6 +132,7 @@ public class OverviewActivity extends AppCompatActivity
 
     private void ReplaceStep(int position){
         StepFragment stepFragment = new StepFragment();
+        current_step=position;
         Bundle b = new Bundle();
         b.putParcelable("step",recipe.getSteps().get(position));
         b.putString("recipe",recipe.getName());
