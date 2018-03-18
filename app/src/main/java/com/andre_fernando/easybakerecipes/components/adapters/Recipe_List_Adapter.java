@@ -22,18 +22,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Recipe_List_Adapter extends RecyclerView.Adapter<Recipe_List_Adapter.ViewHolder> {
+    @SuppressWarnings("CanBeFinal")
     private ArrayList<Recipe> recipe_list;
-    private Context context;
+    private final Context context;
 
     public Recipe_List_Adapter(ArrayList<Recipe> recipe_list, FragmentActivity context) {
         this.recipe_list = recipe_list;
         this.context = context;
     }
 
-    public void RefreshData(ArrayList<Recipe> recipe_list){
-        this.recipe_list = recipe_list;
-        notifyDataSetChanged();
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

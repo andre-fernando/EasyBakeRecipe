@@ -1,12 +1,9 @@
 package com.andre_fernando.easybakerecipes.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.andre_fernando.easybakerecipes.R;
@@ -19,6 +16,9 @@ import java.util.ArrayList;
 
 import timber.log.Timber;
 
+/**
+ * This is the splash screen activity used to load data from the server
+ */
 public class SplashScreenActivity extends AppCompatActivity {
     public static RecipeDB sDB;
     public static ArrayList<Recipe> AllRecipes;
@@ -31,29 +31,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         Init_Main();
     }
 
-    void Init_Main(){
+    private void Init_Main(){
         sDB = RecipeDB.createDB(this);
         new AsyncStartup().execute();
 
     }
 
-    static void onFinish(){
-        if (AllRecipes.size()>0){
-            Intent launchMain = new Intent(App.getAppContext(), MainActivity.class);
-            launchMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            App.getAppContext().startActivity(launchMain);
-        } else {
-            Timber.e("Failed to load data. Causes: No internet, first launch.");
-            Toast.makeText(App.getAppContext(), "No Internet available!!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
-
-
-    public static void changeRecipeNo(int i){
-
-    }
-
+    /**
+     * Async task to get the Recipe data.
+     * This uses the Recipe API class.
+     */
     private static class AsyncStartup extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -63,14 +51,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            onFinish();
+            if (AllRecipes.size()>0){
+                Intent launchMain = new Intent(App.getContext(), MainActivity.class);
+                launchMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                App.getContext().startActivity(launchMain);
+            } else {
+                Timber.e("Failed to load data. Causes: No internet, first launch.");
+                Toast.makeText(App.getContext(), "No Internet available!!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

@@ -5,6 +5,7 @@ android {
     defaultConfig {
         applicationId "com.andre_fernando.easybakerecipes"
         minSdkVersion 19
+        //noinspection OldTargetApi
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,17 +22,17 @@ android {
 dependencies {
     //Google Android Dependencies
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-vector-drawable:27.0.2'
-    compile 'com.android.support:support-v4:27.0.2'
-    compile 'com.android.support:design:27.0.2'
-    compile 'com.android.support:recyclerview-v7:27.0.2'
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:cardview-v7:27.0.2'
-    compile 'com.android.support:preference-v7:27.0.2'
+    compile 'com.android.support:support-vector-drawable:27.1.0'
+    compile 'com.android.support:support-v4:27.1.0'
+    compile 'com.android.support:design:27.1.0'
+    compile 'com.android.support:recyclerview-v7:27.1.0'
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:cardview-v7:27.1.0'
+    compile 'com.android.support:preference-v7:27.1.0'
     //LifeCycle
-    implementation "android.arch.lifecycle:extensions:1.0.0"
+    implementation "android.arch.lifecycle:extensions:1.1.0"
     //Room
     implementation "android.arch.persistence.room:runtime:1.0.0"
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"

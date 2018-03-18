@@ -11,6 +11,7 @@ import com.andre_fernando.easybakerecipes.data_objects.Steps;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("CanBeFinal")
 @Entity
 public class StepsTable {
     @PrimaryKey(autoGenerate = true)
@@ -58,7 +59,7 @@ public class StepsTable {
     }
 
     @Ignore
-    public static ArrayList<StepsTable> fromRecipeObj(Recipe recipe){
+    private static ArrayList<StepsTable> fromRecipeObj(Recipe recipe){
         int Recipe_Id = recipe.getId();
         ArrayList<Steps> StepsObj = new ArrayList<>();
         ArrayList<StepsTable> toReturn = new ArrayList<>();

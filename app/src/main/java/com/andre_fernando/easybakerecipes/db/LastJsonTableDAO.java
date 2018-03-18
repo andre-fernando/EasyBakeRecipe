@@ -14,6 +14,8 @@ public interface LastJsonTableDAO {
     @Query("select json from LastJsonTable where json_id = 1")
     String getJsonString();
 
-    @Query("delete from LastJsonTable where json_id= 1")
-    void removeJsonString();
+// --Commented out by Inspection START (6/3/18 4:34 PM):
+//    @Query("delete from LastJsonTable where json_id= 1")
+//    void removeJsonString();
+// --Commented out by Inspection STOP (6/3/18 4:34 PM)
 }

@@ -3,7 +3,6 @@ package com.andre_fernando.easybakerecipes.components;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.Surface;
 import android.view.SurfaceView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -40,7 +39,7 @@ public class ExoPlayerVideoHandler {
                 playerUri = uri;
                 // Do all the standard ExoPlayer code here...
                 player = ExoPlayerFactory
-                        .newSimpleInstance(App.getAppContext(), new DefaultTrackSelector());
+                        .newSimpleInstance(App.getContext(), new DefaultTrackSelector());
                 exoPlayerView.setPlayer(player);
 
                 MediaSource mediaSource = new ExtractorMediaSource(

@@ -1,7 +1,6 @@
 package com.andre_fernando.easybakerecipes.data_objects;
 
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,8 +9,11 @@ import com.andre_fernando.easybakerecipes.db.IngredientsTable;
 import java.util.ArrayList;
 
 public class Ingredients implements Parcelable {
+    @SuppressWarnings("CanBeFinal")
     private double quantity;
+    @SuppressWarnings("CanBeFinal")
     private String measure;
+    @SuppressWarnings("CanBeFinal")
     private String ingredient;
 
     public Ingredients(double quantity, String measure, String ingredient) {
@@ -23,29 +25,31 @@ public class Ingredients implements Parcelable {
     public static String ConvertToString(ArrayList<Ingredients> i){
         String toReturn = "";
         for (Ingredients x : i){
-            toReturn = toReturn + String.format("%s %s/n",x.getIngredient(),x.getQuantityWithMeasure());
+            toReturn =String.format("%s %s %s \n",toReturn,x.getIngredient(),x.getQuantityWithMeasure());
         }
         return toReturn;
     }
 
-    public static ArrayList<Ingredients> getIngredientsWithId(Cursor cursor, int recipe_id){
-        ArrayList<Ingredients> toReturn = new ArrayList<>();
-        while (cursor.moveToNext()){
-            int tempid;
-            double tempquantity;
-            String tempmeasure, tempingredient;
-
-            cursor.moveToFirst();
-            tempid = cursor.getInt(1);
-            if (recipe_id == tempid){
-                tempquantity=cursor.getDouble(2);
-                tempmeasure=cursor.getString(3);
-                tempingredient=cursor.getString(4);
-                toReturn.add(new Ingredients(tempquantity,tempmeasure,tempingredient));
-            }
-        }
-        return toReturn;
-    }
+// --Commented out by Inspection START (6/3/18 4:50 PM):
+//    public static ArrayList<Ingredients> getIngredientsWithId(Cursor cursor, int recipe_id){
+//        ArrayList<Ingredients> toReturn = new ArrayList<>();
+//        while (cursor.moveToNext()){
+//            int tempid;
+//            double tempquantity;
+//            String tempmeasure, tempingredient;
+//
+//            cursor.moveToFirst();
+//            tempid = cursor.getInt(1);
+//            if (recipe_id == tempid){
+//                tempquantity=cursor.getDouble(2);
+//                tempmeasure=cursor.getString(3);
+//                tempingredient=cursor.getString(4);
+//                toReturn.add(new Ingredients(tempquantity,tempmeasure,tempingredient));
+//            }
+//        }
+//        return toReturn;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:50 PM)
 
     public static ArrayList<Ingredients> fromIngredientsTable
             (int Recipe_Id, ArrayList<IngredientsTable> ingredientsTables){
@@ -62,17 +66,21 @@ public class Ingredients implements Parcelable {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
+// --Commented out by Inspection START (6/3/18 4:33 PM):
+//    public void setQuantity(double quantity) {
+//        this.quantity = quantity;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:33 PM)
 
     public String getMeasure() {
         return measure;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
+// --Commented out by Inspection START (6/3/18 4:33 PM):
+//    public void setMeasure(String measure) {
+//        this.measure = measure;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:33 PM)
 
     public String getIngredient() {
         return ingredient;
@@ -80,9 +88,11 @@ public class Ingredients implements Parcelable {
 
     public String getQuantityWithMeasure(){return String.format("%s %s",quantity,measure);}
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
+// --Commented out by Inspection START (6/3/18 4:33 PM):
+//    public void setIngredient(String ingredient) {
+//        this.ingredient = ingredient;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:33 PM)
 
     @Override
     public int describeContents() {
@@ -96,7 +106,7 @@ public class Ingredients implements Parcelable {
         dest.writeString(this.ingredient);
     }
 
-    protected Ingredients(Parcel in) {
+    private Ingredients(Parcel in) {
         this.quantity = in.readDouble();
         this.measure = in.readString();
         this.ingredient = in.readString();

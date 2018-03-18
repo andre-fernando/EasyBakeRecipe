@@ -11,10 +11,13 @@ import com.andre_fernando.easybakerecipes.data_objects.Recipe;
 import com.andre_fernando.easybakerecipes.fragments.OverviewFragment;
 import com.andre_fernando.easybakerecipes.fragments.StepFragment;
 
+/**
+ * activity that displays the fragments the fragments
+ */
 public class OverviewActivity extends AppCompatActivity
         implements OverviewFragment.stepsClickListener ,
                     StepFragment.NextStepListener{
-    Recipe recipe;
+    private Recipe recipe;
 
 
     @Override
@@ -33,7 +36,7 @@ public class OverviewActivity extends AppCompatActivity
         else Init_Phone();
     }
 
-    void Init_Phone() {
+    private void Init_Phone() {
         OverviewFragment overviewFragment = new OverviewFragment();
         Bundle b = new Bundle();
         b.putParcelable("recipe",recipe);
@@ -45,7 +48,7 @@ public class OverviewActivity extends AppCompatActivity
     }
 
 
-    void Init_Tablet() {
+    private void Init_Tablet() {
         //Overview Left Panel
         OverviewFragment overviewFragment = new OverviewFragment();
         Bundle b_overview = new Bundle();
@@ -97,10 +100,11 @@ public class OverviewActivity extends AppCompatActivity
         }
     }
 
-    void ReplaceStep(int position){
+    private void ReplaceStep(int position){
         StepFragment stepFragment = new StepFragment();
         Bundle b = new Bundle();
         b.putParcelable("step",recipe.getSteps().get(position));
+        b.putString("recipe",recipe.getName());
         stepFragment.setArguments(b);
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         if (MainActivity.twoPane){

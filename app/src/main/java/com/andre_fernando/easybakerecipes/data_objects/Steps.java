@@ -1,21 +1,24 @@
 package com.andre_fernando.easybakerecipes.data_objects;
 
 
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.andre_fernando.easybakerecipes.db.StepsTable;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Steps implements Parcelable {
+    @SuppressWarnings("CanBeFinal")
     private int id;
+    @SuppressWarnings("CanBeFinal")
     private String short_description;
+    @SuppressWarnings("CanBeFinal")
     private String description;
+    @SuppressWarnings("CanBeFinal")
     private String videoUrl;
+    @SuppressWarnings("CanBeFinal")
     private String thumbnailUrl;
 
     /**
@@ -34,26 +37,28 @@ public class Steps implements Parcelable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public static ArrayList<Steps> getStepsWithId(Cursor cursor,int recipe_no){
-        ArrayList<Steps> unsorted = new ArrayList<>();
-        cursor.moveToFirst();
-        while (cursor.moveToNext()){
-            int id, temprecipeId;
-            String short_desc, desc, videourl, thumbnailUrl;
-
-            temprecipeId = cursor.getInt(1);
-            if (recipe_no == temprecipeId){
-                id = cursor.getInt(2);
-                short_desc = cursor.getString(3);
-                desc = cursor.getString(4);
-                videourl = cursor.getString(5);
-                thumbnailUrl = cursor.getString(6);
-
-                unsorted.add(new Steps(id,short_desc,desc,videourl,thumbnailUrl));
-            }
-        }
-        return sortSteps(unsorted);
-    }
+// --Commented out by Inspection START (6/3/18 4:50 PM):
+//    public static ArrayList<Steps> getStepsWithId(Cursor cursor,int recipe_no){
+//        ArrayList<Steps> unsorted = new ArrayList<>();
+//        cursor.moveToFirst();
+//        while (cursor.moveToNext()){
+//            int id, temprecipeId;
+//            String short_desc, desc, videourl, thumbnailUrl;
+//
+//            temprecipeId = cursor.getInt(1);
+//            if (recipe_no == temprecipeId){
+//                id = cursor.getInt(2);
+//                short_desc = cursor.getString(3);
+//                desc = cursor.getString(4);
+//                videourl = cursor.getString(5);
+//                thumbnailUrl = cursor.getString(6);
+//
+//                unsorted.add(new Steps(id,short_desc,desc,videourl,thumbnailUrl));
+//            }
+//        }
+//        return sortSteps(unsorted);
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:50 PM)
 
     public static ArrayList<Steps> fromStepsTable(int Recipe_Id, ArrayList<StepsTable> stepsTables){
         ArrayList<Steps> unSorted = new ArrayList<>();
@@ -89,25 +94,31 @@ public class Steps implements Parcelable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (6/3/18 4:37 PM):
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:37 PM)
 
     public String getShort_description() {
         return short_description;
     }
 
-    public void setShort_description(String short_description) {
-        this.short_description = short_description;
-    }
+// --Commented out by Inspection START (6/3/18 4:37 PM):
+//    public void setShort_description(String short_description) {
+//        this.short_description = short_description;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:37 PM)
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+// --Commented out by Inspection START (6/3/18 4:37 PM):
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:37 PM)
 
     public String getVideoString() {
         return videoUrl;
@@ -115,17 +126,21 @@ public class Steps implements Parcelable {
 
     public Uri getVideoUri(){ return Uri.parse(videoUrl);}
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
+// --Commented out by Inspection START (6/3/18 4:37 PM):
+//    public void setVideoUrl(String videoUrl) {
+//        this.videoUrl = videoUrl;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:37 PM)
 
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
+// --Commented out by Inspection START (6/3/18 4:37 PM):
+//    public void setThumbnailUrl(String thumbnailUrl) {
+//        this.thumbnailUrl = thumbnailUrl;
+//    }
+// --Commented out by Inspection STOP (6/3/18 4:37 PM)
 
     public boolean hasVideo(){ return !this.videoUrl.isEmpty(); }
 
@@ -145,7 +160,7 @@ public class Steps implements Parcelable {
         dest.writeString(this.thumbnailUrl);
     }
 
-    protected Steps(Parcel in) {
+    private Steps(Parcel in) {
         this.id = in.readInt();
         this.short_description = in.readString();
         this.description = in.readString();

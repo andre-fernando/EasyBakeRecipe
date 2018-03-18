@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,6 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Heading"
+            android:id="@+id/tv_overview_recipe_name"
+            android:layout_marginTop="@dimen/Padding_Large"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            android:background="@drawable/curved_border_with_fill"
+            tools:text="Recipe Name"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,4 +71,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

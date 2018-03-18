@@ -4,6 +4,6 @@
     android:initialLayout="@layout/easy_bake_widget"
     android:minHeight="180dp"
     android:minWidth="180dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@mipmap/ic_widget_preview_ebr"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen"/>

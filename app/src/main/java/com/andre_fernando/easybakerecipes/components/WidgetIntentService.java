@@ -5,6 +5,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 
+import com.andre_fernando.easybakerecipes.R;
+
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -49,11 +51,12 @@ public class WidgetIntentService extends IntentService {
         updateAllWidgets();
     }
 
-    void updateAllWidgets(){
+    private void updateAllWidgets(){
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this,EasyBakeWidget.class));
         for (int i: appWidgetIds){
             EasyBakeWidget.updateAppWidget(this,widgetManager,i);
+            widgetManager.notifyAppWidgetViewDataChanged(i,R.id.widget_ingredients_list);
         }
     }
 }

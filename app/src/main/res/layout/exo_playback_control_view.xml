@@ -13,7 +13,8 @@
         style="@style/ExoMediaButton.Play"
         android:layout_margin="@dimen/Padding_Medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/cd_play_button"/>
 
     <ImageButton
         android:id="@+id/exo_fullscreen"
@@ -21,6 +22,7 @@
         android:layout_margin="@dimen/Padding_Medium"
         android:src="@drawable/ic_button_fullscreen"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/fullscreen_button"/>
 
 </android.support.constraint.ConstraintLayout>

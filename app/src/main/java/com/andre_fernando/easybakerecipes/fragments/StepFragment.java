@@ -33,22 +33,33 @@ public class StepFragment extends Fragment {
     private Steps step;
     private Unbinder unbinder;
     private NextStepListener listener;
+    private String recipe_name;
 
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.tv_step_recipe_name)
+    TextView tv_recipe_name;
+
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.tv_step_description)
     TextView step_description;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.iv_step_image)
     ImageView step_Image;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.next_Step)
     Button next_step;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.previous_Step)
     Button previous_step;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.step_video_player)
     SimpleExoPlayerView exoPlayerView;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.exo_fullscreen)
     ImageButton bt_exo_fullscreen;
 
@@ -65,14 +76,18 @@ public class StepFragment extends Fragment {
         Init_StepFragment();
     }
 
-    void Init_StepFragment(){
+    private void Init_StepFragment(){
         try{
+            //noinspection ConstantConditions
             step = getArguments().getParcelable("step");
+            recipe_name = getArguments().getString("recipe");
         }catch (NullPointerException e){
             Timber.e("Failed to receive step in stepfragment.");
         }
 
         if (step !=null){
+            //Heading
+            tv_recipe_name.setText(recipe_name);
 
             //Sets description
             step_description.setText(step.getDescription());
@@ -109,12 +124,11 @@ public class StepFragment extends Fragment {
         }
     }
 
-
     private void Init_video(){
         if (step.hasVideo() && exoPlayerView != null){
             exoPlayerView.setVisibility(View.VISIBLE);
             ExoPlayerVideoHandler.getInstance()
-                    .prepareExoPlayerForUri(App.getAppContext(),step.getVideoUri(),exoPlayerView);
+                    .prepareExoPlayerForUri(App.getContext(),step.getVideoUri(),exoPlayerView);
 
             ExoPlayerVideoHandler.getInstance()
                     .goToForeground();
@@ -123,7 +137,7 @@ public class StepFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
-                    Intent fullscreen_player = new Intent(App.getAppContext(), Fullscreen_Video_Activity.class);
+                    Intent fullscreen_player = new Intent(App.getContext(), Fullscreen_Video_Activity.class);
                     fullscreen_player.putExtra("step",step);
                     startActivity(fullscreen_player);
                 }

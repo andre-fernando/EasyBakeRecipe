@@ -16,15 +16,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Ingredients_Adapter extends RecyclerView.Adapter<Ingredients_Adapter.ViewHolder> {
+    @SuppressWarnings("CanBeFinal")
     private ArrayList<Ingredients> ingredients_list;
 
     public Ingredients_Adapter(ArrayList<Ingredients> ingredients_list) {
         this.ingredients_list = ingredients_list;
-    }
-
-    public void RefreshData(ArrayList<Ingredients> ingredients_list){
-        this.ingredients_list = ingredients_list;
-        notifyDataSetChanged();
     }
 
     @Override

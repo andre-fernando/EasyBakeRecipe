@@ -11,8 +11,8 @@ import com.andre_fernando.easybakerecipes.data_objects.Ingredients;
 import com.andre_fernando.easybakerecipes.data_objects.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
+@SuppressWarnings("CanBeFinal")
 @Entity
 public class IngredientsTable {
     @PrimaryKey(autoGenerate = true)
@@ -52,7 +52,7 @@ public class IngredientsTable {
     }
 
     @Ignore
-    public static ArrayList<IngredientsTable> fromRecipeObj(Recipe recipe){
+    private static ArrayList<IngredientsTable> fromRecipeObj(Recipe recipe){
         int Recipe_Id = recipe.getId();
         ArrayList<Ingredients> ingredients = new ArrayList<>();
         ArrayList<IngredientsTable> toReturn = new ArrayList<>();

@@ -27,6 +27,7 @@ import timber.log.Timber;
 public class RecipeListFragment extends Fragment {
     private Unbinder unbinder;
     private RecipeSelectListener listener;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_recipe_list)
     RecyclerView rv_recipe_list;
 
@@ -39,13 +40,14 @@ public class RecipeListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //noinspection ConstantConditions
         if (view != null) {
             unbinder= ButterKnife.bind(this,view);
             Init_RecylerView();
         }
     }
 
-    void Init_RecylerView(){
+    private void Init_RecylerView(){
         final FragmentActivity fragmentActivity = getActivity();
         if (MainActivity.twoPane){
             rv_recipe_list.setLayoutManager(new GridLayoutManager(fragmentActivity,3));
@@ -85,6 +87,6 @@ public class RecipeListFragment extends Fragment {
     }
 
     public interface RecipeSelectListener{
-        public void recipeSelected(int position);
+        void recipeSelected(int position);
     }
 }

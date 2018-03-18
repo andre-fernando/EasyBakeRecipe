@@ -17,19 +17,27 @@ public interface StepsTableDAO {
     @Query("select * from StepsTable")
     Cursor cp_getAllSteps();
 
-    @Query("select * from StepsTable where recipe_id = :ID")
-    List<StepsTable> getStepsWithId(int ID);
+// --Commented out by Inspection START (6/3/18 4:38 PM):
+//    @Query("select * from StepsTable where recipe_id = :ID")
+//    List<StepsTable> getStepsWithId(int ID);
+// --Commented out by Inspection STOP (6/3/18 4:38 PM)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertSteps(StepsTable stepsTable);
+// --Commented out by Inspection START (6/3/18 4:38 PM):
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertSteps(StepsTable stepsTable);
+// --Commented out by Inspection STOP (6/3/18 4:38 PM)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMultipleSteps(StepsTable... stepsTable);
 
-    @Query("delete from StepsTable where recipe_id = :ID")
-    void removeStepsWithId(int ID);
+// --Commented out by Inspection START (6/3/18 4:38 PM):
+//    @Query("delete from StepsTable where recipe_id = :ID")
+//    void removeStepsWithId(int ID);
+// --Commented out by Inspection STOP (6/3/18 4:38 PM)
 
-    @Query("delete from StepsTable")
-    void deleteAll();
+// --Commented out by Inspection START (6/3/18 4:38 PM):
+//    @Query("delete from StepsTable")
+//    void deleteAll();
+// --Commented out by Inspection STOP (6/3/18 4:38 PM)
 
 }

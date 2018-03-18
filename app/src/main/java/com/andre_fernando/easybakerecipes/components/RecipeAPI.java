@@ -45,11 +45,9 @@ public class RecipeAPI {
         }
     }
 
-
-
     public static ArrayList<Recipe> getData(){
         String fromDB = sDB.jsonDAO().getJsonString();
-        if (NetworkCheck.isConnected(App.getAppContext())){
+        if (NetworkCheck.isConnected(App.getContext())){
             fromServer=getJsonString();
             if (fromDB!=null && fromServer!=null){
                 if (fromServer.equals(fromDB)){
@@ -70,7 +68,7 @@ public class RecipeAPI {
         }
     }
 
-    static ArrayList<Recipe> queryDB(){
+    private static ArrayList<Recipe> queryDB(){
         ArrayList<RecipeTable> recipeTables = new ArrayList<>();
         recipeTables.addAll(sDB.recipeDAO().getAllRecipes());
         ArrayList<IngredientsTable> ingredientsTables = new ArrayList<>();
@@ -94,7 +92,7 @@ public class RecipeAPI {
         sDB.stepsDAO().insertMultipleSteps(stepsTables);
 
         //Backup String
-        sDB.jsonDAO().insertJson(new LastJsonTable(1, fromServer));
+        sDB.jsonDAO().insertJson(new LastJsonTable(fromServer));
     }
 
     private static String getJsonString(){
@@ -197,7 +195,7 @@ public class RecipeAPI {
 
     // Shared Preference methods
     private static void setupSharedPreference(int count){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt(pref_recipe_no,0);
         editor.putInt(pref_count,count);
@@ -205,19 +203,19 @@ public class RecipeAPI {
     }
 
     static int getLastSeenRecipeNo(){
-        return PreferenceManager.getDefaultSharedPreferences(App.getAppContext())
+        return PreferenceManager.getDefaultSharedPreferences(App.getContext())
                 .getInt(pref_recipe_no,0);
     }
 
-    static int getRecipeCount(){
-        return PreferenceManager.getDefaultSharedPreferences(App.getAppContext())
+    private static int getRecipeCount(){
+        return PreferenceManager.getDefaultSharedPreferences(App.getContext())
                 .getInt(pref_count,0);
     }
 
     public static void IncreaseRecipeNo(){
         int recipeNo = getLastSeenRecipeNo()+1;
         int count = getRecipeCount();
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
         SharedPreferences.Editor editor = sp.edit();
         if (recipeNo>=count) editor.putInt(pref_recipe_no,0);
         else editor.putInt(pref_recipe_no,recipeNo);
@@ -227,7 +225,7 @@ public class RecipeAPI {
     public static void DecreaseRecipeNo(){
         int recipeNo = getLastSeenRecipeNo()-1;
         int count = getRecipeCount();
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getAppContext());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
         SharedPreferences.Editor editor = sp.edit();
         if (recipeNo<1) editor.putInt(pref_recipe_no,count-1);
         else editor.putInt(pref_recipe_no,recipeNo);

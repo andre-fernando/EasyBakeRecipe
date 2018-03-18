@@ -8,5 +8,6 @@ import android.view.View;
 public interface ClickListener {
     void onClick(@SuppressWarnings("unused") View view, int position);
 
+    @SuppressWarnings("EmptyMethod")
     void onLongClick(@SuppressWarnings("unused") View view, int position);
 }

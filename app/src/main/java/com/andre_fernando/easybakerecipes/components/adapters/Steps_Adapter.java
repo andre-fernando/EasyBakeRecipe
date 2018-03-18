@@ -18,17 +18,13 @@ import butterknife.ButterKnife;
 
 
 public class Steps_Adapter extends RecyclerView.Adapter<Steps_Adapter.ViewHolder>{
+    @SuppressWarnings("CanBeFinal")
     private ArrayList<Steps> steps_list;
-    private OverviewFragment.stepsClickListener listener;
+    private final OverviewFragment.stepsClickListener listener;
 
     public Steps_Adapter(ArrayList<Steps> steps_list, OverviewFragment.stepsClickListener listener) {
         this.steps_list = steps_list;
         this.listener = listener;
-    }
-
-    public void RefreshData(ArrayList<Steps> steps_list){
-        this.steps_list = steps_list;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -40,15 +36,17 @@ public class Steps_Adapter extends RecyclerView.Adapter<Steps_Adapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder vh, final int position) {
+        final int adapterPosition = vh.getAdapterPosition();
         String toDisplay = String.format("%s: %s",
-                steps_list.get(position).getId()+1,
-                steps_list.get(position).getShort_description());
+                steps_list.get(adapterPosition).getId()+1,
+                steps_list.get(adapterPosition).getShort_description());
         vh.step.setText(toDisplay);
 
         vh.step.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                listener.ClickedStep(position);
+                listener.ClickedStep(adapterPosition);
             }
         });
     }

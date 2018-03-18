@@ -9,8 +9,8 @@ import android.support.annotation.NonNull;
 import com.andre_fernando.easybakerecipes.data_objects.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
+@SuppressWarnings("CanBeFinal")
 @Entity
 public class RecipeTable {
 
@@ -34,7 +34,7 @@ public class RecipeTable {
 
 
     @Ignore
-    public static RecipeTable fromRecipeObj(Recipe recipe){
+    private static RecipeTable fromRecipeObj(Recipe recipe){
         String NAME, IMAGE;
         int ID;
         double SERVINGS;

@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.andre_fernando.easybakerecipes.R;
-import com.andre_fernando.easybakerecipes.activities.SplashScreenActivity;
 import com.andre_fernando.easybakerecipes.components.adapters.Ingredients_Adapter;
 import com.andre_fernando.easybakerecipes.components.adapters.Steps_Adapter;
 import com.andre_fernando.easybakerecipes.data_objects.Recipe;
@@ -26,12 +26,16 @@ import timber.log.Timber;
 public class OverviewFragment extends Fragment {
     private Unbinder unbinder;
     private stepsClickListener listener;
-    private int recipe_no;
-    private Recipe recipe;
 
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.tv_overview_recipe_name)
+    TextView tv_recipe_name;
+
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_ingredients_list)
     RecyclerView rv_ingredients_list;
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_steps_list)
     RecyclerView rv_steps_list;
 
@@ -48,25 +52,29 @@ public class OverviewFragment extends Fragment {
         Init_Overview_Fragment();
     }
 
-    void Init_Overview_Fragment(){
-        final FragmentActivity fragmentActivity = getActivity();
-        /*recipe_no = getArguments().getParcelable("recipe");
-        recipe = SplashScreenActivity.AllRecipes.get(recipe_no);*/
-        recipe = getArguments().getParcelable("recipe");
-        if (recipe != null) {
-            //For Ingredients
-            Ingredients_Adapter ingredients_adapter = new Ingredients_Adapter(recipe.getIngredients());
-            rv_ingredients_list.setLayoutManager(new LinearLayoutManager(fragmentActivity));
-            rv_ingredients_list.hasFixedSize();
-            rv_ingredients_list.setAdapter(ingredients_adapter);
+    private void Init_Overview_Fragment(){
+        try {
+            final FragmentActivity fragmentActivity = getActivity();
+            Recipe recipe = getArguments().getParcelable("recipe");
+            if (recipe != null) {
+                //For Heading
+                tv_recipe_name.setText(recipe.getName());
 
-            //For Steps
-            Steps_Adapter steps_adapter = new Steps_Adapter(recipe.getSteps(),listener);
-            rv_steps_list.setLayoutManager(new LinearLayoutManager(fragmentActivity));
-            rv_steps_list.hasFixedSize();
-            rv_steps_list.setAdapter(steps_adapter);
-        } else Timber.e("Recipe was null!");
+                //For Ingredients
+                Ingredients_Adapter ingredients_adapter = new Ingredients_Adapter(recipe.getIngredients());
+                rv_ingredients_list.setLayoutManager(new LinearLayoutManager(fragmentActivity));
+                rv_ingredients_list.hasFixedSize();
+                rv_ingredients_list.setAdapter(ingredients_adapter);
 
+                //For Steps
+                Steps_Adapter steps_adapter = new Steps_Adapter(recipe.getSteps(),listener);
+                rv_steps_list.setLayoutManager(new LinearLayoutManager(fragmentActivity));
+                rv_steps_list.hasFixedSize();
+                rv_steps_list.setAdapter(steps_adapter);
+            } else Timber.e("Recipe was null!");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -11,15 +11,15 @@ public class RecipeContentProvider extends ContentProvider {
     private static final String RECIPE_TABLE = "RecipeTable";
     private static final String INGREDIENTS_TABLE = "IngredientsTable";
     private static final String STEPS_TABLE ="StepsTable";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+AUTHORITY);
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://"+AUTHORITY);
     public static final Uri RECIPE_URI = append_Uri(RECIPE_TABLE);
     public static final Uri INGREDIENTS_URI = append_Uri(INGREDIENTS_TABLE);
     public static final Uri STEPS_URI = append_Uri(STEPS_TABLE);
     private static RecipeDB sDB;
 
-    public static final int CODE_RECIPE_TABLE = 500;
-    public static final int CODE_INGREDIENTS_TABLE = 501;
-    public static final int CODE_STEPS_TABLE = 502;
+    private static final int CODE_RECIPE_TABLE = 500;
+    private static final int CODE_INGREDIENTS_TABLE = 501;
+    private static final int CODE_STEPS_TABLE = 502;
 
     private static final UriMatcher sURIMATCHER = buildUriMatcher();
 
@@ -28,7 +28,7 @@ public class RecipeContentProvider extends ContentProvider {
                 .appendPath(path).build();
     }
 
-    public static UriMatcher buildUriMatcher(){
+    private static UriMatcher buildUriMatcher(){
         UriMatcher um = new UriMatcher(UriMatcher.NO_MATCH);
         um.addURI(AUTHORITY, RECIPE_TABLE, CODE_RECIPE_TABLE);
         um.addURI(AUTHORITY, INGREDIENTS_TABLE, CODE_INGREDIENTS_TABLE);

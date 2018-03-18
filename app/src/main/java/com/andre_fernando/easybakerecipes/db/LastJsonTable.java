@@ -11,10 +11,11 @@ public class LastJsonTable {
     @NonNull
     public int json_id;
 
+    @SuppressWarnings("WeakerAccess")
     public String json;
 
-    public LastJsonTable(@NonNull int ID, String json_string){
-        this.json_id=ID;
+    public LastJsonTable(String json_string){
+        this.json_id= 1;
         this.json=json_string;
     }
 

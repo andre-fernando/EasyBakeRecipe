@@ -20,13 +20,16 @@ public class Widget_Service extends RemoteViewsService {
 
     public class Remote_Ingredients_Adapter implements RemoteViewsService.RemoteViewsFactory {
 
-        private Context context;
-        private ArrayList<Ingredients> ingredients_list;
+        private final Context context;
+        private ArrayList<String> name,quantity;
+        private Intent intent;
 
 
         public Remote_Ingredients_Adapter(Context context, Intent intent) {
             this.context = context;
-            this.ingredients_list = intent.getParcelableArrayListExtra(EasyBakeWidget.Intent_Ingredients);
+            this.name = intent.getStringArrayListExtra("name");
+            this.quantity = intent.getStringArrayListExtra("quantity");
+            this.intent = intent;
         }
 
         @Override
@@ -35,7 +38,8 @@ public class Widget_Service extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-
+            this.name = this.intent.getStringArrayListExtra("name");
+            this.quantity = this.intent.getStringArrayListExtra("quantity");
         }
 
         @Override
@@ -45,15 +49,15 @@ public class Widget_Service extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            return ingredients_list.size();
+            return name.size();
         }
 
         @Override
         public RemoteViews getViewAt(int i) {
             RemoteViews row = new RemoteViews(context.getPackageName(), R.layout.ingredients_adapter_layout);
-            Ingredients ingredient = ingredients_list.get(i);
-            row.setTextViewText(R.id.tv_ingredient_name,ingredient.getIngredient());
-            row.setTextViewText(R.id.tv_ingredient_quantity,ingredient.getQuantityWithMeasure());
+
+            row.setTextViewText(R.id.tv_ingredient_name,name.get(i));
+            row.setTextViewText(R.id.tv_ingredient_quantity,quantity.get(i));
             return row;
         }
 

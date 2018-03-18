@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.andre_fernando.easybakerecipes.R;
 import com.andre_fernando.easybakerecipes.fragments.RecipeListFragment;
 
+/**
+ * This is the Main Activity class that starts after the Splash screen
+ */
 public class MainActivity extends AppCompatActivity
         implements RecipeListFragment.RecipeSelectListener{
     public static boolean twoPane;
@@ -23,20 +25,24 @@ public class MainActivity extends AppCompatActivity
         Init_Main();
     }
 
-    void Init_Main(){
+    private void Init_Main(){
         twoPane = isTwoPane();
         Init_fragment();
 
     }
 
-    void Init_fragment(){
+    private void Init_fragment(){
         RecipeListFragment recipeListFragment = new RecipeListFragment();
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container_main_a,recipeListFragment);
         transaction.commit();
     }
 
-    boolean isTwoPane(){
+    /**
+     * Method to check if the device smallest width is greater than 600 pixels
+     * @return boolean
+     */
+    private boolean isTwoPane(){
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int widthPixels = dm.widthPixels;
@@ -63,6 +69,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+    /**
+     * Recipe select listener, used to launch an overview of a recipe.
+     * @param position the position in the list view
+     */
     @Override
     public void recipeSelected(int position) {
         Intent lauch_overview = new Intent(MainActivity.this,OverviewActivity.class);
