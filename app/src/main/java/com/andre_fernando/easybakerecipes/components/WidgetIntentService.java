@@ -7,20 +7,12 @@ import android.content.Intent;
 
 import com.andre_fernando.easybakerecipes.R;
 
-
 /**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions and extra parameters.
+ * This class handles button presses of the widget
  */
 public class WidgetIntentService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     public static final String ACTION_FORWARD = "com.andre_fernando.easybakerecipes.components.action.FORWARD";
     public static final String ACTION_BACK = "com.andre_fernando.easybakerecipes.components.action.BACK";
-
-
 
     public WidgetIntentService() {
         super("WidgetIntentService");
@@ -38,25 +30,31 @@ public class WidgetIntentService extends IntentService {
         }
     }
 
-
+    /**
+     * Changes the widget to the next recipe
+     */
     private void handleActionForward() {
-
         RecipeAPI.IncreaseRecipeNo();
         updateAllWidgets();
     }
 
-
+    /**
+     * Changes the widget to the previous recipe
+     */
     private void handleActionBack() {
         RecipeAPI.DecreaseRecipeNo();
         updateAllWidgets();
     }
 
+    /**
+     * updates all the widgets
+     */
     private void updateAllWidgets(){
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this,EasyBakeWidget.class));
         for (int i: appWidgetIds){
-            EasyBakeWidget.updateAppWidget(this,widgetManager,i);
             widgetManager.notifyAppWidgetViewDataChanged(i,R.id.widget_ingredients_list);
+            EasyBakeWidget.updateAppWidget(this,widgetManager,i);
         }
     }
 }

@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        // Double press back to exit
         long current_time = System.currentTimeMillis();
         if (current_time-lastpress >5000){
             Toast.makeText(this, R.string.Toast_Back_to_exit, Toast.LENGTH_SHORT).show();
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
     }
-
 
     /**
      * Recipe select listener, used to launch an overview of a recipe.

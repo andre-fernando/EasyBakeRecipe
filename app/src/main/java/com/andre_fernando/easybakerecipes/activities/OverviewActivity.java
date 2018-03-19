@@ -17,6 +17,7 @@ import com.andre_fernando.easybakerecipes.fragments.StepFragment;
 public class OverviewActivity extends AppCompatActivity
         implements OverviewFragment.stepsClickListener ,
                     StepFragment.NextStepListener{
+
     private Recipe recipe;
     private int current_step;
     private static final String CURRENT_STEP_KEY="current";
@@ -41,6 +42,10 @@ public class OverviewActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Recovery from configuration change
+     * @param step_number the step number the user last seen.
+     */
     private void Recover_StepFragment(int step_number){
         if (MainActivity.twoPane) Init_Tablet(step_number);
         else ReplaceStep(step_number);

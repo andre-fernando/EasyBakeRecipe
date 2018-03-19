@@ -44,7 +44,7 @@
 
     <style name="Body_Custom" parent="AppTheme">
         <item name="android:textColor">@color/TextColor</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 

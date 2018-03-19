@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+// Recipe List adapter
 public class Recipe_List_Adapter extends RecyclerView.Adapter<Recipe_List_Adapter.ViewHolder> {
-    @SuppressWarnings("CanBeFinal")
-    private ArrayList<Recipe> recipe_list;
+    private final ArrayList<Recipe> recipe_list;
     private final Context context;
 
     public Recipe_List_Adapter(ArrayList<Recipe> recipe_list, FragmentActivity context) {

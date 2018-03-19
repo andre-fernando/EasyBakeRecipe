@@ -72,7 +72,7 @@ public class OverviewFragment extends Fragment {
                 rv_steps_list.hasFixedSize();
                 rv_steps_list.setAdapter(steps_adapter);
             } else Timber.e("Recipe was null!");
-        } catch (NullPointerException e) {
+        }catch (NullPointerException e){
             e.printStackTrace();
         }
     }

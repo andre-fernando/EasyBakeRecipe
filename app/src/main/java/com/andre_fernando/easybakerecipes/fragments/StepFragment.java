@@ -118,9 +118,6 @@ public class StepFragment extends Fragment {
                     listener.previousStep(step.getId());
                 }
             });
-
-            //Sets video player
-            //Init_video();
         }
     }
 

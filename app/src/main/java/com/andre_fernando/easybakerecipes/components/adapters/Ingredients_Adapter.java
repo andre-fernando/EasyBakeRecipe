@@ -6,18 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.andre_fernando.easybakerecipes.R;
 import com.andre_fernando.easybakerecipes.data_objects.Ingredients;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//Recycler view adapter for the Ingredients
 public class Ingredients_Adapter extends RecyclerView.Adapter<Ingredients_Adapter.ViewHolder> {
-    @SuppressWarnings("CanBeFinal")
-    private ArrayList<Ingredients> ingredients_list;
+    private final ArrayList<Ingredients> ingredients_list;
 
     public Ingredients_Adapter(ArrayList<Ingredients> ingredients_list) {
         this.ingredients_list = ingredients_list;
@@ -48,7 +45,7 @@ public class Ingredients_Adapter extends RecyclerView.Adapter<Ingredients_Adapte
         @BindView(R.id.tv_ingredient_quantity)
         TextView quantity;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }

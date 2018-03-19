@@ -33,35 +33,6 @@ public class Recipe implements Parcelable {
         this.image = image;
     }
 
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public static ArrayList<Recipe> convertCursor(Cursor recipe, Cursor ingredients, Cursor steps){
-//        if (recipe != null && ingredients != null && steps != null){
-//            ArrayList<Recipe> toReturn = new ArrayList<>();
-//            //Recipes
-//            while (recipe.moveToNext()){
-//                int tempid;
-//                String tempname, tempimage;
-//                double tempservings;
-//
-//                tempid = recipe.getInt(0);
-//                tempname = recipe.getString(1);
-//                tempservings = recipe.getDouble(2);
-//                tempimage = recipe.getString(3);
-//
-//                ArrayList<Ingredients> tempIngredients = Ingredients.getIngredientsWithId(ingredients,tempid);
-//                ArrayList<Steps> tempSteps = Steps.getStepsWithId(steps,tempid);
-//
-//                toReturn.add(new Recipe(tempid,tempname,tempIngredients,tempSteps,tempservings,tempimage));
-//            }
-//            recipe.close();
-//            ingredients.close();
-//            steps.close();
-//            return toReturn;
-//        }
-//        else return new ArrayList<>();
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
-
     public static ArrayList<Recipe> fromRecipeDB(ArrayList<RecipeTable> recipeTables,
                                                  ArrayList<IngredientsTable> ingredientsTables,
                                                  ArrayList<StepsTable> stepsTables){
@@ -85,61 +56,25 @@ public class Recipe implements Parcelable {
         return id;
     }
 
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
-
     public String getName() {
         return name;
     }
-
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
 
     public ArrayList<Ingredients> getIngredients() {
         return ingredients;
     }
 
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setIngredients(ArrayList<Ingredients> ingredients) {
-//        this.ingredients = ingredients;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
-
     public ArrayList<Steps> getSteps() {
         return steps;
     }
-
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setSteps(ArrayList<Steps> steps) {
-//        this.steps = steps;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
 
     public double getServings() {
         return servings;
     }
 
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setServings(int servings) {
-//        this.servings = servings;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
-
     public String getImage() {
         return image;
     }
-
-// --Commented out by Inspection START (6/3/18 4:36 PM):
-//    public void setImage(String image) {
-//        this.image = image;
-//    }
-// --Commented out by Inspection STOP (6/3/18 4:36 PM)
 
     @Override
     public int describeContents() {

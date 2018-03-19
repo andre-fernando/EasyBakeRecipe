@@ -14,6 +14,9 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
+/**
+ * This is a helper class for the video player
+ */
 public class ExoPlayerVideoHandler {
     private static ExoPlayerVideoHandler instance;
 
@@ -50,8 +53,6 @@ public class ExoPlayerVideoHandler {
                                                 null
                                             );
 
-
-
                 // Prepare the player with the source.
                 player.prepare(mediaSource);
             }
@@ -59,9 +60,6 @@ public class ExoPlayerVideoHandler {
             player.clearVideoSurface();
             player.setVideoSurfaceView(
                     (SurfaceView)exoPlayerView.getVideoSurfaceView());
-
-            player.seekTo(player.getCurrentPosition() + 1);
-
         }
     }
 

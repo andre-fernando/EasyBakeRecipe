@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Heading"
+            android:id="@+id/tv_overview_recipe_name"
+            android:layout_marginTop="@dimen/Padding_Large"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            android:background="@drawable/curved_border_with_fill"
+            tools:text="Recipe Name"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/Padding_Large"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            android:background="@drawable/curved_border_default"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                style="@style/Heading"
+                android:layout_margin="@dimen/Padding_Large"
+                android:text="@string/label_ingredients"/>
+
+            <include layout="@layout/divider_line_solid"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_ingredients_list"
+                android:nestedScrollingEnabled="false"
+                android:layout_margin="@dimen/Padding_Large"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/Padding_Large"
+            android:layout_marginBottom="@dimen/Padding_Large"
+            android:orientation="vertical"
+            android:background="@drawable/curved_border_default">
+
+            <TextView
+                style="@style/Heading"
+                android:text="@string/label_Steps"
+                android:layout_margin="@dimen/Padding_Large"/>
+
+            <include layout="@layout/divider_line_solid"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_steps_list"
+                android:nestedScrollingEnabled="false"
+                android:layout_margin="@dimen/Padding_Large"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

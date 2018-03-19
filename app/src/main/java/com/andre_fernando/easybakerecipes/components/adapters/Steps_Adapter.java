@@ -16,10 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-
+// Steps Adapter
 public class Steps_Adapter extends RecyclerView.Adapter<Steps_Adapter.ViewHolder>{
-    @SuppressWarnings("CanBeFinal")
-    private ArrayList<Steps> steps_list;
+    private final ArrayList<Steps> steps_list;
     private final OverviewFragment.stepsClickListener listener;
 
     public Steps_Adapter(ArrayList<Steps> steps_list, OverviewFragment.stepsClickListener listener) {
@@ -37,9 +36,18 @@ public class Steps_Adapter extends RecyclerView.Adapter<Steps_Adapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder vh, final int position) {
         final int adapterPosition = vh.getAdapterPosition();
-        String toDisplay = String.format("%s: %s",
-                steps_list.get(adapterPosition).getId()+1,
-                steps_list.get(adapterPosition).getShort_description());
+        int step_number= steps_list.get(adapterPosition).getId();
+        String toDisplay;
+
+        if (step_number == 0){ // if it's the Recipe Introduction
+            toDisplay =steps_list.get(adapterPosition).getShort_description();
+            vh.step.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        } else {
+            toDisplay = String.format("%s: %s",
+                        step_number,
+                        steps_list.get(adapterPosition).getShort_description());
+        }
+
         vh.step.setText(toDisplay);
 
         vh.step.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +68,7 @@ public class Steps_Adapter extends RecyclerView.Adapter<Steps_Adapter.ViewHolder
         @BindView(R.id.bt_step_number)
         Button step;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }

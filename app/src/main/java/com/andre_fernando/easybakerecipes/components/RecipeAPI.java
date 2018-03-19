@@ -193,6 +193,8 @@ public class RecipeAPI {
         }
     }
 
+
+
     // Shared Preference methods
     private static void setupSharedPreference(int count){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
@@ -212,7 +214,7 @@ public class RecipeAPI {
                 .getInt(pref_count,0);
     }
 
-    public static void IncreaseRecipeNo(){
+    static void IncreaseRecipeNo(){
         int recipeNo = getLastSeenRecipeNo()+1;
         int count = getRecipeCount();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
@@ -222,7 +224,7 @@ public class RecipeAPI {
         editor.apply();
     }
 
-    public static void DecreaseRecipeNo(){
+    static void DecreaseRecipeNo(){
         int recipeNo = getLastSeenRecipeNo()-1;
         int count = getRecipeCount();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(App.getContext());
