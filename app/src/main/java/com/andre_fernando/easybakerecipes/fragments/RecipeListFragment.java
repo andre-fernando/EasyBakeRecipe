@@ -27,6 +27,7 @@ import timber.log.Timber;
 public class RecipeListFragment extends Fragment {
     private Unbinder unbinder;
     private RecipeSelectListener listener;
+
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_recipe_list)
     RecyclerView rv_recipe_list;
@@ -54,6 +55,8 @@ public class RecipeListFragment extends Fragment {
         } else {
             rv_recipe_list.setLayoutManager(new GridLayoutManager(fragmentActivity,1));
         }
+
+
 
         Recipe_List_Adapter list_adapter = new Recipe_List_Adapter
                 (SplashScreenActivity.AllRecipes,fragmentActivity);

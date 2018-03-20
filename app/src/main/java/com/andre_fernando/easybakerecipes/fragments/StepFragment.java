@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.andre_fernando.easybakerecipes.R;
 import com.andre_fernando.easybakerecipes.activities.Fullscreen_Video_Activity;
+import com.andre_fernando.easybakerecipes.activities.OverviewActivity;
 import com.andre_fernando.easybakerecipes.components.App;
 import com.andre_fernando.easybakerecipes.components.ExoPlayerVideoHandler;
 import com.andre_fernando.easybakerecipes.data_objects.Steps;
@@ -33,11 +35,9 @@ public class StepFragment extends Fragment {
     private Steps step;
     private Unbinder unbinder;
     private NextStepListener listener;
-    private String recipe_name;
+    private final String Bundle_Key = "key";
 
-    @SuppressWarnings("WeakerAccess")
-    @BindView(R.id.tv_step_recipe_name)
-    TextView tv_recipe_name;
+    private long position;
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.tv_step_description)
@@ -73,22 +73,22 @@ public class StepFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this,view);
+        if (savedInstanceState != null){
+            ExoPlayerVideoHandler.getInstance()
+                    .getSavedPosition(savedInstanceState.getLong(Bundle_Key));
+        }
         Init_StepFragment();
     }
 
     private void Init_StepFragment(){
         try{
             //noinspection ConstantConditions
-            step = getArguments().getParcelable("step");
-            recipe_name = getArguments().getString("recipe");
+            step = getArguments().getParcelable(OverviewActivity.BUNDLE_KEY_STEP);
         }catch (NullPointerException e){
             Timber.e("Failed to receive step in stepfragment.");
         }
 
         if (step !=null){
-            //Heading
-            tv_recipe_name.setText(recipe_name);
-
             //Sets description
             step_description.setText(step.getDescription());
 
@@ -127,12 +127,10 @@ public class StepFragment extends Fragment {
             ExoPlayerVideoHandler.getInstance()
                     .prepareExoPlayerForUri(App.getContext(),step.getVideoUri(),exoPlayerView);
 
-            ExoPlayerVideoHandler.getInstance()
-                    .goToForeground();
-
             bt_exo_fullscreen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    ExoPlayerVideoHandler.getInstance().saveCurrentPosition();
                     ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
                     Intent fullscreen_player = new Intent(App.getContext(), Fullscreen_Video_Activity.class);
                     fullscreen_player.putExtra("step",step);
@@ -156,14 +154,14 @@ public class StepFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        ExoPlayerVideoHandler.getInstance().goToBackground();
+        position = ExoPlayerVideoHandler.getInstance().getCurrentPosition();
+        ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
     }
 
 
@@ -177,6 +175,12 @@ public class StepFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     +" must implement StepFragment.NextStepListener");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle b) {
+        b.putLong(Bundle_Key,position);
+        super.onSaveInstanceState(b);
     }
 
     public interface NextStepListener {

@@ -1,10 +1,13 @@
 package com.andre_fernando.easybakerecipes.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.andre_fernando.easybakerecipes.R;
 import com.andre_fernando.easybakerecipes.data_objects.Recipe;
@@ -20,8 +23,7 @@ public class OverviewActivity extends AppCompatActivity
 
     private Recipe recipe;
     private int current_step;
-    private static final String CURRENT_STEP_KEY="current";
-    private static final String IS_OVERVIEW = "overview";
+    public static final String BUNDLE_KEY_STEP = "step";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,39 +32,22 @@ public class OverviewActivity extends AppCompatActivity
         Intent overview = getIntent();
         recipe = overview.getParcelableExtra("recipe");
 
-        if (savedInstanceState !=null){
-            boolean is_overview =savedInstanceState.getBoolean(IS_OVERVIEW);
-            if (is_overview){
-                Init_Overview();
-            } else {
-                current_step = savedInstanceState.getInt(CURRENT_STEP_KEY);
-                Recover_StepFragment(current_step);
-            }
-        }else Init_Overview();
+        if (savedInstanceState == null) Init_Overview();
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent)));
+            actionBar.setTitle(recipe.getName());
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
-
-    /**
-     * Recovery from configuration change
-     * @param step_number the step number the user last seen.
-     */
-    private void Recover_StepFragment(int step_number){
-        if (MainActivity.twoPane) Init_Tablet(step_number);
-        else ReplaceStep(step_number);
-    }
-
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        Fragment current = getSupportFragmentManager().findFragmentById(R.id.container_overview_a);
-        if ((MainActivity.twoPane) || (current instanceof StepFragment)){
-            outState.putInt(CURRENT_STEP_KEY,current_step);
-            if (current instanceof OverviewFragment) {
-                outState.putBoolean(IS_OVERVIEW, true);
-            }
-            else outState.putBoolean(IS_OVERVIEW,false);
-        } else outState.putBoolean(IS_OVERVIEW, true);
-        super.onSaveInstanceState(outState);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void Init_Overview() {
@@ -139,8 +124,7 @@ public class OverviewActivity extends AppCompatActivity
         StepFragment stepFragment = new StepFragment();
         current_step=position;
         Bundle b = new Bundle();
-        b.putParcelable("step",recipe.getSteps().get(position));
-        b.putString("recipe",recipe.getName());
+        b.putParcelable(BUNDLE_KEY_STEP,recipe.getSteps().get(position));
         stepFragment.setArguments(b);
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         if (MainActivity.twoPane){

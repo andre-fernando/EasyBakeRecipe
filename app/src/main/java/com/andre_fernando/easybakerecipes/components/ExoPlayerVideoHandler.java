@@ -3,7 +3,6 @@ package com.andre_fernando.easybakerecipes.components;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.SurfaceView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -29,7 +28,7 @@ public class ExoPlayerVideoHandler {
 
     private SimpleExoPlayer player;
     private Uri playerUri;
-    private boolean isPlayerPlaying;
+    private long savedPosition =0;
 
     private ExoPlayerVideoHandler(){}
 
@@ -52,14 +51,16 @@ public class ExoPlayerVideoHandler {
                                                 null,
                                                 null
                                             );
+                if (savedPosition != 0){
+                    player.seekTo(savedPosition);
+                }
+                savedPosition = 0;
 
+                player.setPlayWhenReady(false);
                 // Prepare the player with the source.
-                player.prepare(mediaSource);
+                player.prepare(mediaSource,false,false);
             }
             exoPlayerView.setPlayer(player);
-            player.clearVideoSurface();
-            player.setVideoSurfaceView(
-                    (SurfaceView)exoPlayerView.getVideoSurfaceView());
         }
     }
 
@@ -71,16 +72,20 @@ public class ExoPlayerVideoHandler {
         player = null;
     }
 
-    public void goToBackground(){
+    public long getCurrentPosition(){
         if(player != null){
-            isPlayerPlaying = player.getPlayWhenReady();
-            player.setPlayWhenReady(false);
+            return player.getCurrentPosition();
+        }
+        return 0;
+    }
+
+    public void saveCurrentPosition(){
+        if(player != null){
+            savedPosition= player.getCurrentPosition();
         }
     }
 
-    public void goToForeground(){
-        if(player != null){
-            player.setPlayWhenReady(isPlayerPlaying);
-        }
+    public void getSavedPosition(long position){
+        savedPosition = position;
     }
 }

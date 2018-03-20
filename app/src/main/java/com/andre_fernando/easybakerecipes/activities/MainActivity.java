@@ -1,7 +1,9 @@
 package com.andre_fernando.easybakerecipes.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
@@ -16,20 +18,29 @@ public class MainActivity extends AppCompatActivity
         implements RecipeListFragment.RecipeSelectListener{
     public static boolean twoPane;
     private long lastpress=0;
+    public static final String SAVED_SCROLL_STATE = "save";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Init_Main();
+        Init_Main(savedInstanceState);
     }
 
-    private void Init_Main(){
+    private void Init_Main(Bundle b){
         twoPane = isTwoPane();
-        Init_fragment();
+        if (b == null){
+            Init_fragment();
+        }
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent)));
+        }
     }
+
+
 
     private void Init_fragment(){
         RecipeListFragment recipeListFragment = new RecipeListFragment();
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         float widthDp = widthPixels / scaleFactor;
         float heightDp = heightPixels / scaleFactor;
         float smallestWidth = Math.min(widthDp,heightDp);
-        return smallestWidth>600;
+        return smallestWidth>=600;
     }
 
     @Override

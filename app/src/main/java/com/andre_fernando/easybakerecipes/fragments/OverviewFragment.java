@@ -28,10 +28,6 @@ public class OverviewFragment extends Fragment {
     private stepsClickListener listener;
 
     @SuppressWarnings("WeakerAccess")
-    @BindView(R.id.tv_overview_recipe_name)
-    TextView tv_recipe_name;
-
-    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_ingredients_list)
     RecyclerView rv_ingredients_list;
 
@@ -57,9 +53,6 @@ public class OverviewFragment extends Fragment {
             final FragmentActivity fragmentActivity = getActivity();
             Recipe recipe = getArguments().getParcelable("recipe");
             if (recipe != null) {
-                //For Heading
-                tv_recipe_name.setText(recipe.getName());
-
                 //For Ingredients
                 Ingredients_Adapter ingredients_adapter = new Ingredients_Adapter(recipe.getIngredients());
                 rv_ingredients_list.setLayoutManager(new LinearLayoutManager(fragmentActivity));

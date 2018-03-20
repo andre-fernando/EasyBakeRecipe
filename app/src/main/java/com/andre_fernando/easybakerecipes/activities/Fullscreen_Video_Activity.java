@@ -44,8 +44,6 @@ public class Fullscreen_Video_Activity extends AppCompatActivity {
             ExoPlayerVideoHandler.getInstance()
                     .prepareExoPlayerForUri(this,step.getVideoUri(),exo_player_view_fullscreen);
 
-            ExoPlayerVideoHandler.getInstance().goToForeground();
-
             bt_exo_fullscreen_close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -58,12 +56,7 @@ public class Fullscreen_Video_Activity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        ExoPlayerVideoHandler.getInstance().goToBackground();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        ExoPlayerVideoHandler.getInstance().saveCurrentPosition();
         ExoPlayerVideoHandler.getInstance().releaseVideoPlayer();
     }
 }
